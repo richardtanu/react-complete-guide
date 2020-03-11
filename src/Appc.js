@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Person from './Person/Person';
 // import Radium from 'radium';
-// import classes from '*.module.css';
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-	font: inherit;
-	border: 1px solid red;
-	padding: 8px;
-  cursor: pointer;
-  color: white;
-  &:hover {
-        background-color:  ${props => props.alt ? 'salmon' : 'yellowgreen'} ;
-        color: black;
-  }
-`;
+
+// const StyledButton = styled.button`
+//   background-color: ${props => props.alt ? 'red' : 'green'};
+// 	font: inherit;
+// 	border: 1px solid red;
+// 	padding: 8px;
+//   cursor: pointer;
+//   color: white;
+//   &:hover {
+//         background-color:  ${props => props.alt ? 'salmon' : 'yellowgreen'} ;
+//         color: black;
+//   }
+// `;
 class Appc extends Component {
   state = {
     persons: [
@@ -147,14 +147,14 @@ class Appc extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p className={cssClass.join(' ')}>This is really working!</p>
-        {/* <button> */}
-        <StyledButton
-          // style={style}
+        <button
+        {/* <StyledButton 
+           style={style} */}
           alt={this.state.showPersons}
           onClick={this.togglePersonHandler}>
           Show Name
-        </StyledButton>
-        {/* </button> */}
+        {/* </StyledButton> */}
+        </button>
         {/* inefficient way */}
 				{/* <button
 					style={style}
