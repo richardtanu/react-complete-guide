@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from  './App.module.css';
 // import styled from 'styled-components';
 import Person from './Person/Person';
 // import Radium from 'radium';
@@ -82,19 +82,20 @@ class Appc extends Component {
     this.setState({showPersons: !doesShow});
   };
 	render() {
-		const style = {
-			backgroundColor: 'green',
-			font: "inherit",
-			border: "1px solid red",
-			padding: "8px",
-      cursor: "pointer",
-      color: 'white',
-      ':hover': {
-        backgroundColor: 'yellowgreen',
-        color: 'black'
-      }
-    }
+		// const style = {
+		// 	backgroundColor: 'green',
+		// 	font: "inherit",
+		// 	border: "1px solid red",
+		// 	padding: "8px",
+    //   cursor: "pointer",
+    //   color: 'white',
+    //   ':hover': {
+    //     backgroundColor: 'yellowgreen',
+    //     color: 'black'
+    //   }
+    // }
     let persons = null;
+    let btnClass = '';
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -128,33 +129,38 @@ class Appc extends Component {
             /> */}
         </div>
       );
+
+      //changed into THIS
       // style.backgroundColor = 'red';
       // style[':hover'] = {
       //   backgroundColor: 'salmon',
       //   color: 'black'
       // }
       // style.border = "1px solid green";
+      //THIS
+      btnClass = styles.Red; 
       
     }
     let cssClass = [];
     if ( this.state.persons.length <= 2 ) { 
-      cssClass.push('red');
+      cssClass.push(styles.red);
     }
     if (this.state.persons.length <= 1) { 
-      cssClass.push('bold');
+      cssClass.push(styles.bold);
     }
     return (
-      <div className="App">
+      <div className={styles.App}>
         <h1>Hi, I'm a React App</h1>
         <p className={cssClass.join(' ')}>This is really working!</p>
-        <button
-        {/* <StyledButton 
+          {/* <StyledButton 
            style={style} */}
+        <button className={btnClass}
           alt={this.state.showPersons}
           onClick={this.togglePersonHandler}>
           Show Name
-        {/* </StyledButton> */}
         </button>
+        {/* </StyledButton> */}
+
         {/* inefficient way */}
 				{/* <button
 					style={style}
