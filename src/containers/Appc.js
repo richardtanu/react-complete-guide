@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styles from  './App.module.css';
 // import styled from 'styled-components';
 // import Person from '../Components/Persons/Person/Person';
-import Persons from '../Components/Persons/Persons'
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 
 // import Radium from 'radium';
 
@@ -97,36 +98,13 @@ class Appc extends Component {
     //   }
     // }
     let persons = null;
-    let btnClass = '';
+    
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          <Persons
+      persons = <Persons
             persons={this.state.persons}
             clicked={this.deletPersonHandler}
             changed={this.nameChangedHandler}
           />
-            {/* <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-                // change={this.nameChangedHandler}
-            // click={this.switchNameHandler.bind(this, "CHRISTIN")}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              // click={this.switchNameHandler.bind(this, 'Christin Wijaya')}
-              change={this.nameChangedHandler}
-            >
-              My Hobbies: Racing
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-                age={this.state.persons[2].age}
-                // change={this.nameChangedHandler}
-            /> */}
-        </div>
-      );
 
       //changed into THIS
       // style.backgroundColor = 'red';
@@ -136,36 +114,16 @@ class Appc extends Component {
       // }
       // style.border = "1px solid green";
       //THIS
-      btnClass = styles.Red; 
+      // btnClass = styles.Red; 
       
-    }
-    let cssClass = [];
-    if ( this.state.persons.length <= 2 ) { 
-      cssClass.push(styles.red);
-    }
-    if (this.state.persons.length <= 1) { 
-      cssClass.push(styles.bold);
     }
     return (
       <div className={styles.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={cssClass.join(' ')}>This is really working!</p>
-          {/* <StyledButton 
-           style={style} */}
-        <button className={btnClass}
-          alt={this.state.showPersons}
-          onClick={this.togglePersonHandler}>
-          Show Name
-        </button>
-        {/* </StyledButton> */}
-
-        {/* inefficient way */}
-				{/* <button
-					style={style}
-					onClick={() => this.switchNameHandler('Christin inefficient')}
-				>
-					Switch Name
-				</button> */}
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.togglePersonHandler}
+        />
         {persons}
       </div>
     );
