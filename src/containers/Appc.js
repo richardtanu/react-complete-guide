@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styles from  './App.module.css';
 // import styled from 'styled-components';
-import Person from './Person/Person';
+// import Person from '../Components/Persons/Person/Person';
+import Persons from '../Components/Persons/Persons'
+
 // import Radium from 'radium';
 
 // const StyledButton = styled.button`
@@ -99,15 +101,11 @@ class Appc extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => { 
-            return <Person
-              name={person.name}
-              age={person.age}
-              click={() => this.deletPersonHandler(index)}
-              change={(event) => this.nameChangedHandler(event, person.id)}
-              key={index}
-            />
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletPersonHandler}
+            changed={this.nameChangedHandler}
+          />
             {/* <Person
               name={this.state.persons[0].name}
               age={this.state.persons[0].age}
