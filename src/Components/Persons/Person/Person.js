@@ -20,6 +20,7 @@ const person = (props) => {
             width: '450px'
         }
     };
+    console.log('[Person.js] rendering...');
     return (
         // <StyledDiv>
         <div className={styles.Person}>

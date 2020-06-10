@@ -20,6 +20,10 @@ import Cockpit from '../Components/Cockpit/Cockpit';
 //   }
 // `;
 class Appc extends Component {
+  constructor(props) { 
+    super(props);
+    console.log('[Appc.js] constructor');
+  }
   state = {
     persons: [
       {id:'p1', name: 'Max', age: 28 },
@@ -30,6 +34,16 @@ class Appc extends Component {
     showPersons: false,
   };
 
+  static getDerivedStateFromProps(props, state) { 
+    console.log('[Appc.js] getDerivedStateFromProps', props);
+    return state;
+  }
+  // componentWillMount() { 
+  //   console.log('[Appc.js] will mount');
+  // }
+  // componentDidMount() { 
+  //   console.log('[Appc.js] did mount');
+  // }
   nameChangedHandler = (event, id) => {
 
     //find the index by id from persons state, then check if id is there. return the id to variable
@@ -84,7 +98,8 @@ class Appc extends Component {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
   };
-	render() {
+  render() {
+    console.log('[Appc.js] render');
 		// const style = {
 		// 	backgroundColor: 'green',
 		// 	font: "inherit",
@@ -105,17 +120,6 @@ class Appc extends Component {
             clicked={this.deletPersonHandler}
             changed={this.nameChangedHandler}
           />
-
-      //changed into THIS
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
-      // style.border = "1px solid green";
-      //THIS
-      // btnClass = styles.Red; 
-      
     }
     return (
       <div className={styles.App}>
