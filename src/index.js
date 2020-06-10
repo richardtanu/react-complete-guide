@@ -5,7 +5,7 @@ import Appc from './containers/Appc';
 // import Apph from './Apph';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<Appc />, document.getElementById('root'));
+ReactDOM.render(<Appc appTitle="Person Management"/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
