@@ -7,8 +7,16 @@ const Cockpit = (props) => {
       setTimeout(() => {
         alert('Save change successfully to cloud server');
       }, 100);
+      return () => { 
+        console.log('[Cockpit.js] clean up work');
+      }
     },[]);
-
+    useEffect(() => { 
+      console.log('[Cockpit.js] 2nd useEffect');
+      return () => { 
+        console.log('[Cockpit.js] 2nd clean up work');
+      }
+    });
     let cssClass = [];
     let btnClass = '';
     btnClass = styles.Red;
