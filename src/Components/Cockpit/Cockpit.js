@@ -4,7 +4,10 @@ import styles from './Cockpit.module.css';
 const Cockpit = (props) => {
     useEffect(() => { 
       console.log('[Cockpit.js] useEffect');
-    });
+      setTimeout(() => {
+        alert('Save change successfully to cloud server');
+      }, 100);
+    },[]);
 
     let cssClass = [];
     let btnClass = '';
