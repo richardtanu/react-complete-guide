@@ -1,5 +1,6 @@
 import React, {Component } from 'react';
 import styles from './Person.module.css';
+import Aux from "../../../HOC/auxilary";
 // import Radium from 'radium';
 // import styled from 'styled-components';
 // const StyledDiv = styled.div`
@@ -23,20 +24,16 @@ class Person extends Component {
     // constructor(props) {
     //     super(props);
     // }
-    render() { 
+    render() {
         console.log('[Person.js] rendering...');
         return (
-            // <StyledDiv>
-            <div className={styles.Person}>
-                <p onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
-                <p>{this.props.children}</p>
-                <input onChange={this.props.changed} value={this.props.name} type="text" />
-            </div>
-            // </StyledDiv>
+            <Aux>
+                <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
+                <p key="p2">{this.props.children}</p>
+                <input key="p3" onChange={this.props.changed} value={this.props.name} type="text" />
+            </Aux>
         );
     }
-    
-    
 }  
     
 export default Person;
