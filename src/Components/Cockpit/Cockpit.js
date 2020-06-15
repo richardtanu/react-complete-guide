@@ -4,10 +4,12 @@ import styles from './Cockpit.module.css';
 const Cockpit = (props) => {
     useEffect(() => { 
       console.log('[Cockpit.js] useEffect');
+      //const timer = 
       setTimeout(() => {
         alert('Save change successfully to cloud server');
-      }, 100);
+      }, 1000);
       return () => { 
+        // clearTimeout(timer);
         console.log('[Cockpit.js] clean up work');
       }
     },[]);

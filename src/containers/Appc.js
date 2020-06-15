@@ -45,13 +45,15 @@ class Appc extends Component {
   componentDidMount() { 
     console.log('[Appc.js] componentDidMount');
   }
-  componentDidUpdate(prevProps, prevState) { 
-    console.log('[Appc.js] componentDidUpdate');
-  }
   shouldComponentUpdate() { 
     console.log('[Appc.js] shouldComponentUpdate');
     return true;
   }
+  componentDidUpdate(prevProps, prevState) { 
+    console.log('[Appc.js] componentDidUpdate');
+    
+  }
+  
   nameChangedHandler = (event, id) => {
 
     //find the index by id from persons state, then check if id is there. return the id to variable
