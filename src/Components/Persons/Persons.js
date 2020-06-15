@@ -1,6 +1,6 @@
-import React, { Component }from 'react';
+import React, { PureComponent }from 'react';
 import Person from './Person/Person';
-class Persons extends Component {
+class Persons extends PureComponent {
     constructor(props) { 
         super(props);
         this.state = {}
@@ -12,15 +12,18 @@ class Persons extends Component {
     // UNSAFE_componentWillReceiveProps() { 
     //     console.log('[Persons.js] UNSAFE_componentWillReceiveProps', this.props);
     // }
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[Persons.js]  shouldComponentUpdate');
-        if (nextProps.persons !== this.props.persons) {
-            return true;
-        } else { 
-            return false;
-        }
-        // return true;
-    }
+
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[Persons.js]  shouldComponentUpdate');
+    //     if (nextProps.persons !== this.props.persons ||
+    //         nextProps.changed !== this.props.changed ||
+    //         nextProps.clicked !== this.props.clicked) {
+    //         return true;
+    //     } else { 
+    //         return false;
+    //     }
+    //     // return true;
+    // }
     getSnapshotBeforeUpdate(prevProps, nextState) { 
         console.log('[Persons.js]  getSnapshotBeforeUpdate');
         return { message: 'Snapshot!'};
