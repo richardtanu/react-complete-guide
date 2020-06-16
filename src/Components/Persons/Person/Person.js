@@ -1,6 +1,7 @@
 import React, {Component , Fragment} from 'react';
 import styles from './Person.module.css';
-import Aux from "../../../HOC/auxilary";
+import auxilary from "../../../HOC/auxilary";
+import withCalass from '../../../HOC/withClass';
 // import Radium from 'radium';
 // import styled from 'styled-components';
 // const StyledDiv = styled.div`
@@ -27,13 +28,17 @@ class Person extends Component {
     render() {
         console.log('[Person.js] rendering...');
         return (
-            <React.Fragment>
-                <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
-                <p key="p2">{this.props.children}</p>
-                <input key="p3" onChange={this.props.changed} value={this.props.name} type="text" />
-            </React.Fragment>
+            <auxilary>
+            {/* <div className = { styles.Person } > */}
+            {/* // <React.Fragment> */}
+            <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
+            <p key="p2">{this.props.children}</p>
+            <input key="p3" onChange={this.props.changed} value={this.props.name} type="text" />
+            {/* // </React.Fragment> */}
+            {/* </div > */}
+            </auxilary>
         );
     }
 }  
     
-export default Person;
+export default withCalass(Person, styles.Person);

@@ -4,7 +4,8 @@ import styles from  './App.module.css';
 // import Person from '../Components/Persons/Person/Person';
 import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
-import WClass from '../../src/HOC/withClass';
+import withClass from '../../src/HOC/withClass';
+import auxilary from '../HOC/auxilary';
 // import Radium from 'radium';
 
 // const StyledButton = styled.button`
@@ -132,7 +133,8 @@ class Appc extends Component {
           />
     }
     return (
-      <WClass classes={styles.App}>
+      // <WClass classes={styles.App}>
+      <auxilary>
         <button onClick={() => { 
           this.setState({
             showCockpit: false
@@ -147,10 +149,11 @@ class Appc extends Component {
           />
         ) : null}
         {persons}
-      </WClass>
+      {/* </WClass> */}
+      </auxilary>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default Appc;
+export default withClass(Appc, styles.App);

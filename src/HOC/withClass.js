@@ -1,8 +1,11 @@
 import React from 'react';
 
-const withClass = props => (
-    <div classname={props.classes}>
-        {props.children}
-    </div>
-);
+const withClass = (WrappedComponent, className, props) => { 
+    return props => (
+        <div className={className}>
+            {/* the spread operator ... will be add all props send to this functional component */}
+            <WrappedComponent {...props}/>
+        </div>
+    );
+}
 export default withClass;
