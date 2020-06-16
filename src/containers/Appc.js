@@ -34,6 +34,7 @@ class Appc extends Component {
     otherState: 'some other value',
     showPersons: false,
     showCockpit: true,
+    changeCounter: 0,
   };
 
   static getDerivedStateFromProps(props, state) { 
@@ -81,8 +82,12 @@ class Appc extends Component {
     //point the index that equals personIndex then replace with new object
     persons[personIndex] = person; //updated a new element
     //set new person state with new object
-    this.setState({
-      persons:persons
+    this.setState((prevState, props) => {
+      //best way to updating the state when you depending on old state.
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      }
     });
 	};
   

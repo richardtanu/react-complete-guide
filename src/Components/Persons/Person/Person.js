@@ -30,11 +30,11 @@ class Person extends Component {
         return (
             <auxilary>
             {/* <div className = { styles.Person } > */}
-            {/* // <React.Fragment> */}
+            {/* <React.Fragment> */}
             <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
             <p key="p2">{this.props.children}</p>
             <input key="p3" onChange={this.props.changed} value={this.props.name} type="text" />
-            {/* // </React.Fragment> */}
+            {/* </React.Fragment> */}
             {/* </div > */}
             </auxilary>
         );
