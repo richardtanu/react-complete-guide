@@ -2,6 +2,7 @@ import React, {Component , Fragment} from 'react';
 import styles from './Person.module.css';
 import auxilary from "../../../HOC/auxilary";
 import withCalass from '../../../HOC/withClass';
+import PropTypes from 'prop-types';
 // import Radium from 'radium';
 // import styled from 'styled-components';
 // const StyledDiv = styled.div`
@@ -40,5 +41,10 @@ class Person extends Component {
         );
     }
 }  
-    
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+};
 export default withCalass(Person, styles.Person);
