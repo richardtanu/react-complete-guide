@@ -43,11 +43,10 @@ class Person extends Component {
             <p key="p2">{this.props.children}</p>
             <input
                 key="p3"
-                ref={(inputEl) => { }}
                 // this is ok
                 // ref={(inputEl) => {this.inputElement = inputEl}}
                 ref={this.inputElementRef}
-                 onChange={this.props.changed}
+                onChange={this.props.changed}
                 value={this.props.name}
                 type="text"
             />

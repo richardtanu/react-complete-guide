@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './Cockpit.module.css';
 
 const Cockpit = (props) => {
+  const toggleButtonRef = useRef(null);
+  
     useEffect(() => { 
       console.log('[Cockpit.js] useEffect');
-      //const timer = 
-      setTimeout(() => {
-        alert('Save change successfully to cloud server');
-      }, 1000);
+      //const timer = put setTimeout here
+      // setTimeout(() => {
+      //   alert('Save change successfully to cloud server');
+      // }, 1000);
+      toggleButtonRef.current.click();
       return () => { 
         // clearTimeout(timer);
         console.log('[Cockpit.js] clean up work');
@@ -32,15 +35,17 @@ const Cockpit = (props) => {
       cssClass.push(styles.bold);
     }
     return (
-        <div className={styles.Cockpit}>
+      <div className={styles.Cockpit}>
         <h1>{props.title}</h1>
         <p className={cssClass.join(' ')}>This is really working!</p>
-        <button className={btnClass}
+        <button
+          ref={toggleButtonRef}
+          className={btnClass}
         //   alt={props.showPersons}
           onClick={props.clicked}>
                 Show Name
         </button>
-        </div>
+      </div>
     );
 };
 
