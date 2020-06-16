@@ -23,9 +23,16 @@ class Person extends Component {
             width: '450px'
         }
     };
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) { 
+        super(props);
+        // any reference object
+        this.inputElementRef = React.createRef();
+    }
+    componentDidMount() { 
+        //functional style
+        // this.inputElement.focus();
+        this.inputElementRef.current.focus();
+    }
     render() {
         console.log('[Person.js] rendering...');
         return (
@@ -34,13 +41,23 @@ class Person extends Component {
             {/* <React.Fragment> */}
             <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
             <p key="p2">{this.props.children}</p>
-            <input key="p3" onChange={this.props.changed} value={this.props.name} type="text" />
+            <input
+                key="p3"
+                ref={(inputEl) => { }}
+                // this is ok
+                // ref={(inputEl) => {this.inputElement = inputEl}}
+                ref={this.inputElementRef}
+                 onChange={this.props.changed}
+                value={this.props.name}
+                type="text"
+            />
             {/* </React.Fragment> */}
             {/* </div > */}
             </auxilary>
         );
     }
-}  
+}
+
 Person.propTypes = {
     click: PropTypes.func,
     name: PropTypes.string,
