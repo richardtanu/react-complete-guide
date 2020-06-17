@@ -1,5 +1,6 @@
 import React, { PureComponent }from 'react';
 import Person from './Person/Person';
+
 class Persons extends PureComponent {
     constructor(props) { 
         super(props);
@@ -47,6 +48,8 @@ class Persons extends PureComponent {
                 click={() => this.props.clicked(index)}
                 changed={(event) => this.props.changed(event, person.id)}
                 key={index}
+                //removed cause we not consuming context using is auth as props
+                // isAuth={this.props.isAuth}
             />
         });
     }

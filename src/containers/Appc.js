@@ -6,6 +6,7 @@ import Persons from '../Components/Persons/Persons';
 import Cockpit from '../Components/Cockpit/Cockpit';
 import withClass from '../../src/HOC/withClass';
 import auxilary from '../HOC/auxilary';
+import AuthContext from '../context/auth-context';
 // import Radium from 'radium';
 
 // const StyledButton = styled.button`
@@ -35,6 +36,7 @@ class Appc extends Component {
     showPersons: false,
     showCockpit: true,
     changeCounter: 0,
+    authenticated: false
   };
 
   static getDerivedStateFromProps(props, state) { 
@@ -53,7 +55,6 @@ class Appc extends Component {
   }
   componentDidUpdate(prevProps, prevState) { 
     console.log('[Appc.js] componentDidUpdate');
-    
   }
   
   nameChangedHandler = (event, id) => {
@@ -114,6 +115,9 @@ class Appc extends Component {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
   };
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+   }
   render() {
     console.log('[Appc.js] render');
 		// const style = {
@@ -145,15 +149,22 @@ class Appc extends Component {
             showCockpit: false
           })
         }}>Remove Cockpit</button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePersonHandler}
-          />
-        ) : null}
-        {persons}
+        <AuthContext.Provider value={
+          {
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonHandler}
+              isAuthenticated={this.loginHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       {/* </WClass> */}
       </auxilary>
     );

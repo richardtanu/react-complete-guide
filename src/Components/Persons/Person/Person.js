@@ -3,6 +3,7 @@ import styles from './Person.module.css';
 import auxilary from "../../../HOC/auxilary";
 import withCalass from '../../../HOC/withClass';
 import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context';
 // import Radium from 'radium';
 // import styled from 'styled-components';
 // const StyledDiv = styled.div`
@@ -37,21 +38,27 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             <auxilary>
-            {/* <div className = { styles.Person } > */}
-            {/* <React.Fragment> */}
-            <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
-            <p key="p2">{this.props.children}</p>
-            <input
-                key="p3"
-                // this is ok
-                // ref={(inputEl) => {this.inputElement = inputEl}}
-                ref={this.inputElementRef}
-                onChange={this.props.changed}
-                value={this.props.name}
-                type="text"
-            />
-            {/* </React.Fragment> */}
-            {/* </div > */}
+                <AuthContext.Consumer>
+                { 
+                    (context) => context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>
+                }
+                </AuthContext.Consumer>
+                {/* {this.props.isAuth ? } */}
+                {/* <div className = { styles.Person } > */}
+                {/* <React.Fragment> */}
+                <p key="p1" onClick={this.props.click} >I'm {this.props.name} and I am {this.props.age} years old!</p>
+                <p key="p2">{this.props.children}</p>
+                <input
+                    key="p3"
+                    // this is ok
+                    // ref={(inputEl) => {this.inputElement = inputEl}}
+                    ref={this.inputElementRef}
+                    onChange={this.props.changed}
+                    value={this.props.name}
+                    type="text"
+                />
+                {/* </React.Fragment> */}
+                {/* </div > */}
             </auxilary>
         );
     }
