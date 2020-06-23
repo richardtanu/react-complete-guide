@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import styles from  './App.module.css';
 // import styled from 'styled-components';
-import Person from './Person/Person';
+// import Person from '../Components/Persons/Person/Person';
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
+import withClass from '../../src/HOC/withClass';
+import auxilary from '../HOC/auxilary';
+import AuthContext from '../context/auth-context';
 // import Radium from 'radium';
 
 // const StyledButton = styled.button`
@@ -17,6 +22,10 @@ import Person from './Person/Person';
 //   }
 // `;
 class Appc extends Component {
+  constructor(props) { 
+    super(props);
+    console.log('[Appc.js] constructor');
+  }
   state = {
     persons: [
       {id:'p1', name: 'Max', age: 28 },
@@ -25,8 +34,29 @@ class Appc extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
+    showCockpit: true,
+    changeCounter: 0,
+    authenticated: false
   };
 
+  static getDerivedStateFromProps(props, state) { 
+    console.log('[Appc.js] getDerivedStateFromProps', props);
+    return state;
+  }
+  // componentWillMount() { 
+  //   console.log('[Appc.js] will mount');
+  // }
+  componentDidMount() { 
+    console.log('[Appc.js] componentDidMount');
+  }
+  shouldComponentUpdate() { 
+    console.log('[Appc.js] shouldComponentUpdate');
+    return true;
+  }
+  componentDidUpdate(prevProps, prevState) { 
+    console.log('[Appc.js] componentDidUpdate');
+  }
+  
   nameChangedHandler = (event, id) => {
 
     //find the index by id from persons state, then check if id is there. return the id to variable
@@ -53,8 +83,12 @@ class Appc extends Component {
     //point the index that equals personIndex then replace with new object
     persons[personIndex] = person; //updated a new element
     //set new person state with new object
-    this.setState({
-      persons:persons
+    this.setState((prevState, props) => {
+      //best way to updating the state when you depending on old state.
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      }
     });
 	};
   
@@ -81,7 +115,11 @@ class Appc extends Component {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
   };
-	render() {
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+   }
+  render() {
+    console.log('[Appc.js] render');
 		// const style = {
 		// 	backgroundColor: 'green',
 		// 	font: "inherit",
@@ -95,84 +133,43 @@ class Appc extends Component {
     //   }
     // }
     let persons = null;
-    let btnClass = '';
+    
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => { 
-            return <Person
-              name={person.name}
-              age={person.age}
-              click={() => this.deletPersonHandler(index)}
-              change={(event) => this.nameChangedHandler(event, person.id)}
-              key={index}
-            />
-          })}
-            {/* <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-                // change={this.nameChangedHandler}
-            // click={this.switchNameHandler.bind(this, "CHRISTIN")}
-            />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              // click={this.switchNameHandler.bind(this, 'Christin Wijaya')}
-              change={this.nameChangedHandler}
-            >
-              My Hobbies: Racing
-            </Person>
-            <Person
-              name={this.state.persons[2].name}
-                age={this.state.persons[2].age}
-                // change={this.nameChangedHandler}
-            /> */}
-        </div>
-      );
-
-      //changed into THIS
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
-      // style.border = "1px solid green";
-      //THIS
-      btnClass = styles.Red; 
-      
-    }
-    let cssClass = [];
-    if ( this.state.persons.length <= 2 ) { 
-      cssClass.push(styles.red);
-    }
-    if (this.state.persons.length <= 1) { 
-      cssClass.push(styles.bold);
+      persons = <Persons
+            persons={this.state.persons}
+            clicked={this.deletPersonHandler}
+            changed={this.nameChangedHandler}
+          />
     }
     return (
-      <div className={styles.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={cssClass.join(' ')}>This is really working!</p>
-          {/* <StyledButton 
-           style={style} */}
-        <button className={btnClass}
-          alt={this.state.showPersons}
-          onClick={this.togglePersonHandler}>
-          Show Name
-        </button>
-        {/* </StyledButton> */}
-
-        {/* inefficient way */}
-				{/* <button
-					style={style}
-					onClick={() => this.switchNameHandler('Christin inefficient')}
-				>
-					Switch Name
-				</button> */}
-        {persons}
-      </div>
+      // <WClass classes={styles.App}>
+      <auxilary>
+        <button onClick={() => { 
+          this.setState({
+            showCockpit: false
+          })
+        }}>Remove Cockpit</button>
+        <AuthContext.Provider value={
+          {
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}>
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonHandler}
+              isAuthenticated={this.loginHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
+      {/* </WClass> */}
+      </auxilary>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default Appc;
+export default withClass(Appc, styles.App);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import Person from './Person/Person';
+import Person from '../Person/Person';
 // import Radium, { StyleRoot } from 'radium';
 
 const Apph = props => {
